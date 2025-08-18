@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from './Button'
 
 const Main = () => {
     return (
@@ -6,8 +7,8 @@ const Main = () => {
             <div className='container'>
                 <div className='p-5 text-center bg-light-dark rounded'>
                     <h1 className='text-light'>Stock Prediction Portal</h1>
-                    <p className='text-light lead'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil accusamus asperiores blanditiis molestiae ex reiciendis perferendis! Facilis atque rerum molestias quasi ad ipsam, sapiente ea distinctio placeat dolorum doloremque eligendi, ab, perferendis incidunt magnam numquam!</p>
-                    <a className='btn btn-outline-success' href="">Login</a>
+                    <p className='text-light lead'>This stock prediction application utilizes machine learning techniques, specifically employing Keras, and LSTM model, integrated within the Django framework. It forecasts future stock prices by analyzing 100-day and 200-day moving averages, essential indicators widely used by stock analysts to inform trading and investment decisions</p>
+                    <Button class='btn-outline-success' href="" text='Login'/>
 
                 </div>
             </div>
