@@ -2,26 +2,41 @@ import React, { use, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
 const Login = () => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const [errors, setErrors] = useState('');
+
+    const navigate = useNavigate();
 
     const hadleLogin = async (e) => {
         e.preventDefault();
         setLoading(true);
+
         const userData = { username, password };
         console.log(userData);
 
         try {
             const response = await axios.post('http://127.0.0.1:8000/api/v1/token/', userData);
+
             console.log(response.data);
             console.log(response);
+
+            localStorage.setItem('accessToken', response.data.access);
+            localStorage.setItem('refreshToken', response.data.refresh);
+            console.log('Login successful!');
+            navigate('/');
+
         } catch (error) {
             console.error('Invalid credentials', error);
-        } finally { }
+            setErrors('Invalid username or password');
+        } finally {
+            setLoading(false);
+        }
     }
 
     return (
@@ -40,6 +55,8 @@ const Login = () => {
                                 <input type="password" className='form-control' placeholder='Set password' value={password} onChange={(e) => setPassword(e.target.value)} />
 
                             </div>
+
+                            {errors && <div className='text-danger mb-3'>{errors}</div>}
 
                             {loading ? (
                                 <button type='submit' className='btn btn-info d-block mx-auto' disabled><FontAwesomeIcon icon={faSpinner} spin /> Please wait...</button>
