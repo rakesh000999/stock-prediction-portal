@@ -1,8 +1,8 @@
 import { useContext } from 'react'
-import { AuthContext } from '../AuthProvider'
+import { AuthContext } from './AuthProvider'
 import { Navigate } from 'react-router-dom'
 
-const PrivateRoute = () => {
+const PrivateRoute = ({children}) => {
 
     const { isLoggedIn } = useContext(AuthContext);
 
