@@ -8,7 +8,7 @@ const Header = () => {
     const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const handleLogout = () =>{
+    const handleLogout = () => {
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
         setIsLoggedIn(false);
@@ -22,7 +22,11 @@ const Header = () => {
 
                 <div className=''>
                     {isLoggedIn ? (
-                        <button className='btn btn-danger' onClick={handleLogout}>Logout</button>
+                        <>
+                            <Button text='Dashboard' class='btn-outline-info' url="/dashboard" />
+                            &nbsp;
+                            <button className='btn btn-danger' onClick={handleLogout}>Logout</button>
+                        </>
                     ) : (
                         <>
                             <Button text='Login' class='btn-outline-info' url="/login" />
