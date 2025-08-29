@@ -10,6 +10,7 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(false);
     const [plot, setPlot] = useState();
     const [ma100, setMa100] = useState();
+    const [ma200, setMa200] = useState();
 
     useEffect(() => {
         const fetchProtectedData = async () => {
@@ -36,8 +37,10 @@ const Dashboard = () => {
             const backendRoot = import.meta.env.VITE_BACKEND_ROOT;
             const plotUrl = `${backendRoot}${response.data.plot_img}`;
             const ma100Url = `${backendRoot}${response.data.plot_100_dma}`;
+            const ma200Url = `${backendRoot}${response.data.plot_200_dma}`;
             setPlot(plotUrl);
             setMa100(ma100Url);
+            setMa200(ma200Url);
 
             setError("");
 
@@ -78,6 +81,10 @@ const Dashboard = () => {
 
                         <div className="p-3">
                             {ma100 && <img src={ma100} style={{ maxWidth: '100%' }} />}
+                        </div>
+
+                        <div className="p-3">
+                            {ma200 && <img src={ma200} style={{ maxWidth: '100%' }} />}
                         </div>
                     </div>
 
