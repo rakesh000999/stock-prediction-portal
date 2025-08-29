@@ -8,6 +8,7 @@ const Dashboard = () => {
     const [ticker, setTicker] = useState("");
     const [error, setError] = useState();
     const [loading, setLoading] = useState(false);
+    const [plot, setPlot] = useState("");
 
     useEffect(() => {
         const fetchProtectedData = async () => {
@@ -28,8 +29,15 @@ const Dashboard = () => {
         try {
             const response = await axiosInstance.post('/predict/', {
                 ticker: ticker
-            })
+            });
             console.log(response.data);
+
+            const backendRoot = import.meta.env.VITE_BACKEND_ROOT;
+            const plotUrl = `${backendRoot}${response.data.plot_img}`;
+            setPlot(plotUrl);
+
+            setError("");
+
             if (response.data.error) {
                 setError(response.data.error);
             }
@@ -58,6 +66,14 @@ const Dashboard = () => {
                             </button>
                         </form>
                     </div>
+
+                    {/* Print Prediction Plots */}
+                    <div className="prediction mt-5">
+                        <div className="p-3">
+                            {plot && <img src={plot} style={{ maxWidth: '100%' }} />}
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </>
