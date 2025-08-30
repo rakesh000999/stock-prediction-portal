@@ -11,6 +11,7 @@ const Dashboard = () => {
     const [plot, setPlot] = useState();
     const [ma100, setMa100] = useState();
     const [ma200, setMa200] = useState();
+    const [prediction, setPrediction] = useState();
 
     useEffect(() => {
         const fetchProtectedData = async () => {
@@ -38,9 +39,11 @@ const Dashboard = () => {
             const plotUrl = `${backendRoot}${response.data.plot_img}`;
             const ma100Url = `${backendRoot}${response.data.plot_100_dma}`;
             const ma200Url = `${backendRoot}${response.data.plot_200_dma}`;
+            const predictionUrl = `${backendRoot}${response.data.plot_prediction}`;
             setPlot(plotUrl);
             setMa100(ma100Url);
             setMa200(ma200Url);
+            setPrediction(predictionUrl);
 
             setError("");
 
@@ -85,6 +88,10 @@ const Dashboard = () => {
 
                         <div className="p-3">
                             {ma200 && <img src={ma200} style={{ maxWidth: '100%' }} />}
+                        </div>
+
+                        <div className="p-3">
+                            {prediction && <img src={prediction} style={{ maxWidth: '100%' }} />}
                         </div>
                     </div>
 
